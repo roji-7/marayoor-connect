@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import vijayImg from "@/assets/tvk-vijay-bg.png.asset.json";
+
 
 export function Leader() {
   return (
@@ -39,12 +41,11 @@ export function Leader() {
           className="relative"
         >
           <div className="relative mx-auto aspect-[3/4] max-w-sm overflow-hidden rounded-3xl border-4 border-tvk-gold shadow-glow animate-float">
-            <div className="absolute inset-0 bg-gradient-to-br from-tvk-red via-tvk-black to-tvk-red" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-              <div className="text-9xl animate-flame">🔥</div>
-              <div className="mt-4 font-display text-3xl text-tvk-gold">VIJAY</div>
-              <div className="mt-1 font-display text-xl text-foreground">தலைவர்</div>
-              <div className="mt-6 rounded-full border border-tvk-gold/50 px-4 py-1 text-xs uppercase tracking-widest text-tvk-gold">
+            <img src={vijayImg.url} alt="Thalapathy Vijay - TVK Leader" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-tvk-black/90 via-tvk-black/40 to-transparent p-6 text-center">
+              <div className="font-display text-3xl text-tvk-gold drop-shadow-lg">VIJAY</div>
+              <div className="mt-1 font-display text-lg text-foreground">தலைவர்</div>
+              <div className="mx-auto mt-3 inline-block rounded-full border border-tvk-gold/70 bg-tvk-black/60 px-4 py-1 text-xs uppercase tracking-widest text-tvk-gold backdrop-blur-sm">
                 Thalapathy
               </div>
             </div>
