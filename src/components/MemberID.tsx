@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import html2canvas from "html2canvas";
 import { Download, Upload, BadgeCheck } from "lucide-react";
-import idBg from "@/assets/idcard-bg.jpg";
+import idBg from "@/assets/tvk-vijay-bg.png.asset.json";
 
 type FormData = {
   name: string;
@@ -187,38 +187,38 @@ export function MemberID() {
               ref={cardRef}
               className="relative aspect-[1/1.58] w-full max-w-[340px] overflow-hidden rounded-2xl shadow-glow border-4 border-tvk-gold"
               style={{
-                backgroundImage: `linear-gradient(135deg, rgba(20,5,5,0.55), rgba(120,20,20,0.6)), url(${idBg})`,
+                backgroundImage: `url(${idBg.url})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
               {/* Top header */}
-              <div className="bg-tvk-black/85 px-3 py-2 text-center backdrop-blur-sm">
-                <div className="font-display text-base leading-tight text-tvk-gold">தமிழக வெற்றிக் கழகம்</div>
-                <div className="font-display text-[10px] uppercase tracking-widest text-foreground">Tamilaga Vettri Kazhagam • Marayoor</div>
+              <div className="bg-tvk-red/95 px-3 py-2 text-center shadow-md">
+                <div className="font-display text-base leading-tight text-tvk-gold drop-shadow">தமிழக வெற்றிக் கழகம்</div>
+                <div className="font-display text-[10px] uppercase tracking-widest text-white">Tamilaga Vettri Kazhagam • Marayoor</div>
               </div>
 
-              {/* Photo */}
-              <div className="mt-4 flex justify-center">
-                <div className="h-24 w-24 overflow-hidden rounded-lg border-2 border-tvk-gold bg-card shadow-lg">
+              {/* Circular Photo */}
+              <div className="mt-5 flex justify-center">
+                <div className="h-28 w-28 overflow-hidden rounded-full border-4 border-tvk-gold bg-card shadow-xl ring-2 ring-tvk-red/60">
                   {form.photo ? (
                     <img src={form.photo} alt="member" className="h-full w-full object-cover" />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-xs text-muted-foreground">PHOTO</div>
+                    <div className="flex h-full w-full items-center justify-center text-[10px] text-muted-foreground">PHOTO</div>
                   )}
                 </div>
               </div>
 
-              {/* Details */}
+              {/* Name */}
               <div className="mt-3 px-4 text-center">
-                <div className="font-display text-base text-tvk-gold drop-shadow-lg leading-tight uppercase">
+                <div className="font-display text-lg text-tvk-red drop-shadow leading-tight uppercase">
                   {form.name || "MEMBER NAME"}
                 </div>
-                <div className="mt-0.5 text-[10px] uppercase tracking-widest text-foreground/90">Active Member</div>
+                <div className="mt-0.5 text-[10px] uppercase tracking-widest text-tvk-black/80 font-semibold">Active Member</div>
               </div>
 
               {/* Info grid */}
-              <div className="mx-3 mt-3 rounded-lg bg-tvk-black/75 p-2.5 text-[10px] text-foreground backdrop-blur-sm">
+              <div className="mx-4 mt-3 rounded-lg bg-tvk-black/85 p-2.5 text-[10px] text-foreground backdrop-blur-sm shadow-lg">
                 <div className="flex justify-between border-b border-tvk-gold/30 py-1">
                   <span className="text-tvk-gold/80">ID No:</span>
                   <span className="font-mono font-bold">{memberId}</span>
@@ -232,17 +232,17 @@ export function MemberID() {
                   <span>{form.dob || "—"}</span>
                 </div>
                 <div className="flex justify-between py-1">
-                  <span className="text-tvk-gold/80">Blood Group:</span>
-                  <span className="font-bold text-tvk-red">{form.blood || "—"}</span>
+                  <span className="text-tvk-gold/80">Blood:</span>
+                  <span className="font-bold text-tvk-gold">{form.blood || "—"}</span>
                 </div>
               </div>
 
               {/* Footer */}
               <div className="absolute bottom-0 left-0 right-0 bg-tvk-red px-3 py-1.5 text-center">
-                <div className="font-display text-[10px] uppercase tracking-widest text-foreground">
-                  ★ Victory for Tamil Nadu ★
+                <div className="font-display text-[10px] uppercase tracking-widest text-white">
+                  ★ TVK Marayoor Official ★
                 </div>
-                <div className="text-[8px] text-foreground/80">tvk-marayoor.official</div>
+                <div className="text-[8px] text-white/80">tvk-marayoor.official</div>
               </div>
             </div>
 
