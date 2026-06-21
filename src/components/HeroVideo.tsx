@@ -9,27 +9,14 @@ export function HeroVideo() {
       className="relative w-full overflow-hidden bg-tvk-black"
       style={{ height: "100svh", minHeight: "560px" }}
     >
-      {/* Background video — covers on desktop, contains on small phones so full frame is visible */}
+      {/* Background video — full frame on mobile (contain), cinematic cover on desktop */}
       <video
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        poster=""
-        className="absolute inset-0 h-full w-full object-cover object-center sm:object-cover"
-      >
-        <source src={video.url} type="video/mp4" />
-      </video>
-
-      {/* Mobile-friendly contained video layer (shows full frame on phones) */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="absolute inset-0 h-full w-full object-contain sm:hidden"
+        className="absolute inset-0 h-full w-full object-contain object-center sm:object-cover"
         style={{ background: "var(--tvk-black)" }}
       >
         <source src={video.url} type="video/mp4" />
