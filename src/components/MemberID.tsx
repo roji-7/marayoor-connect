@@ -181,68 +181,91 @@ export function MemberID() {
             transition={{ duration: 0.7 }}
             className="flex flex-col items-center"
           >
-            <h3 className="mb-6 font-display text-2xl text-tvk-gold">Your ID Card</h3>
+            <h3 className="mb-6 font-display text-2xl text-tvk-gold">Your Official ID Card</h3>
 
             <div
               ref={cardRef}
-              className="relative aspect-[1/1.58] w-full max-w-[340px] overflow-hidden rounded-2xl shadow-glow border-4 border-tvk-gold"
+              className="relative aspect-[1/1.6] w-full max-w-[360px] overflow-hidden rounded-2xl border-[3px] border-tvk-gold shadow-glow"
               style={{
-                backgroundImage: `url(${idBg.url})`,
+                backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.85) 100%), url(${idBg.url})`,
                 backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundPosition: "center top",
               }}
             >
-              {/* Top header */}
-              <div className="bg-tvk-red/95 px-3 py-2 text-center shadow-md">
-                <div className="font-display text-base leading-tight text-tvk-gold drop-shadow">தமிழக வெற்றிக் கழகம்</div>
-                <div className="font-display text-[10px] uppercase tracking-widest text-white">Tamilaga Vettri Kazhagam • Marayoor</div>
+              {/* Gold corner ribbons */}
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-tvk-gold via-yellow-200 to-tvk-gold" />
+                <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-tvk-gold via-yellow-200 to-tvk-gold" />
               </div>
 
-              {/* Circular Photo */}
-              <div className="mt-5 flex justify-center">
-                <div className="h-28 w-28 overflow-hidden rounded-full border-4 border-tvk-gold bg-card shadow-xl ring-2 ring-tvk-red/60">
+              {/* Header */}
+              <div className="relative bg-gradient-to-r from-tvk-red via-red-700 to-tvk-red px-3 py-2.5 text-center shadow-md">
+                <div className="font-display text-[15px] leading-tight text-tvk-gold drop-shadow">
+                  தமிழக வெற்றிக் கழகம்
+                </div>
+                <div className="font-display text-[9px] uppercase tracking-[0.25em] text-white/95">
+                  Tamilaga Vettri Kazhagam
+                </div>
+                <div className="mt-0.5 inline-block rounded-sm bg-tvk-gold px-2 py-[1px] font-display text-[9px] uppercase tracking-[0.2em] text-tvk-black">
+                  Marayoor Unit • Official
+                </div>
+              </div>
+
+              {/* Photo */}
+              <div className="relative mt-5 flex justify-center">
+                <div className="absolute inset-x-0 top-1/2 mx-auto h-px w-24 -translate-y-1/2 bg-tvk-gold/40" />
+                <div className="relative h-28 w-28 overflow-hidden rounded-full border-[3px] border-tvk-gold bg-card shadow-2xl ring-4 ring-tvk-red/70">
                   {form.photo ? (
                     <img src={form.photo} alt="member" className="h-full w-full object-cover" />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-[10px] text-muted-foreground">PHOTO</div>
+                    <div className="flex h-full w-full items-center justify-center text-[10px] text-muted-foreground">
+                      PHOTO
+                    </div>
                   )}
                 </div>
               </div>
 
               {/* Name */}
               <div className="mt-3 px-4 text-center">
-                <div className="font-display text-lg text-tvk-red drop-shadow leading-tight uppercase">
+                <div className="font-display text-[19px] uppercase leading-tight tracking-wide text-tvk-gold drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                   {form.name || "MEMBER NAME"}
                 </div>
-                <div className="mt-0.5 text-[10px] uppercase tracking-widest text-tvk-black/80 font-semibold">Active Member</div>
+                <div className="mt-1 inline-block rounded-full border border-tvk-gold/60 bg-tvk-black/60 px-2.5 py-[2px] text-[9px] uppercase tracking-[0.25em] text-tvk-gold backdrop-blur-sm">
+                  ★ Active Member ★
+                </div>
               </div>
 
               {/* Info grid */}
-              <div className="mx-4 mt-3 rounded-lg bg-tvk-black/85 p-2.5 text-[10px] text-foreground backdrop-blur-sm shadow-lg">
-                <div className="flex justify-between border-b border-tvk-gold/30 py-1">
-                  <span className="text-tvk-gold/80">ID No:</span>
-                  <span className="font-mono font-bold">{memberId}</span>
+              <div className="mx-3.5 mt-3 rounded-md border border-tvk-gold/40 bg-tvk-black/85 p-2.5 text-[10.5px] text-foreground shadow-lg backdrop-blur-sm">
+                <div className="grid grid-cols-[70px_1fr] items-center gap-x-2 gap-y-1.5">
+                  <span className="text-tvk-gold/90">ID No</span>
+                  <span className="truncate text-right font-mono font-bold text-white">{memberId}</span>
+                  <span className="text-tvk-gold/90">Phone</span>
+                  <span className="truncate text-right text-white">{form.phone || "—"}</span>
+                  <span className="text-tvk-gold/90">DOB</span>
+                  <span className="truncate text-right text-white">{form.dob || "—"}</span>
+                  <span className="text-tvk-gold/90">Blood Group</span>
+                  <span className="text-right font-bold text-tvk-red">{form.blood || "—"}</span>
                 </div>
-                <div className="flex justify-between border-b border-tvk-gold/30 py-1">
-                  <span className="text-tvk-gold/80">Phone:</span>
-                  <span>{form.phone || "—"}</span>
+              </div>
+
+              {/* Signature strip */}
+              <div className="absolute bottom-7 left-0 right-0 mx-3.5 flex items-end justify-between text-[8px] text-tvk-gold/80">
+                <div className="text-left">
+                  <div className="h-[1px] w-16 bg-tvk-gold/60" />
+                  <span className="uppercase tracking-widest">Member Sign</span>
                 </div>
-                <div className="flex justify-between border-b border-tvk-gold/30 py-1">
-                  <span className="text-tvk-gold/80">DOB:</span>
-                  <span>{form.dob || "—"}</span>
-                </div>
-                <div className="flex justify-between py-1">
-                  <span className="text-tvk-gold/80">Blood:</span>
-                  <span className="font-bold text-tvk-gold">{form.blood || "—"}</span>
+                <div className="text-right">
+                  <div className="ml-auto h-[1px] w-16 bg-tvk-gold/60" />
+                  <span className="uppercase tracking-widest">Authorised</span>
                 </div>
               </div>
 
               {/* Footer */}
-              <div className="absolute bottom-0 left-0 right-0 bg-tvk-red px-3 py-1.5 text-center">
-                <div className="font-display text-[10px] uppercase tracking-widest text-white">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-tvk-red via-red-700 to-tvk-red px-3 py-1.5 text-center">
+                <div className="font-display text-[10px] uppercase tracking-[0.3em] text-tvk-gold">
                   ★ TVK Marayoor Official ★
                 </div>
-                <div className="text-[8px] text-white/80">tvk-marayoor.official</div>
               </div>
             </div>
 
