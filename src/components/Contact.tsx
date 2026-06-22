@@ -201,6 +201,17 @@ export function Footer() {
           <p className="font-display text-xs uppercase tracking-[0.35em] text-tvk-gold">
             ★ Victory for Tamil Nadu ★
           </p>
+          <p className="text-xs text-muted-foreground">
+            Developed by{" "}
+            <a
+              href="https://zybeo.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-tvk-gold transition hover:text-white hover:underline"
+            >
+              Zybeo Tech Studio
+            </a>
+          </p>
         </div>
       </div>
     </footer>
