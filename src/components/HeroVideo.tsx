@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import video from "@/assets/tvk-bg.mp4.asset.json";
 
+interface ConnInfo {
+  saveData?: boolean;
+  effectiveType?: "2g" | "3g" | "4g" | "slow-2g";
+}
+
 export function HeroVideo() {
   const [videoMode, setVideoMode] = useState<{
     preload: "auto" | "metadata" | "none";
@@ -10,7 +15,7 @@ export function HeroVideo() {
   }>({ preload: "metadata", loadSource: true });
 
   useEffect(() => {
-    const conn = (navigator as Navigator & { connection?: NetworkInformation }).connection;
+    const conn = (navigator as Navigator & { connection?: ConnInfo }).connection;
     const saveData = conn?.saveData;
     const effectiveType = conn?.effectiveType;
 
@@ -37,7 +42,6 @@ export function HeroVideo() {
         playsInline
         preload={videoMode.preload}
         poster="/assets/tvk-bg-poster.jpg"
-        fetchPriority="high"
         className="absolute inset-0 h-full w-full object-contain object-center sm:object-cover"
         style={{ background: "var(--tvk-black)" }}
       >
