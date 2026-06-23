@@ -1,8 +1,28 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import video from "@/assets/tvk-bg.mp4.asset.json";
 
 export function HeroVideo() {
+  const [videoMode, setVideoMode] = useState<{
+    preload: "auto" | "metadata" | "none";
+    loadSource: boolean;
+  }>({ preload: "metadata", loadSource: true });
+
+  useEffect(() => {
+    const conn = (navigator as Navigator & { connection?: NetworkInformation }).connection;
+    const saveData = conn?.saveData;
+    const effectiveType = conn?.effectiveType;
+
+    if (saveData || effectiveType === "2g" || effectiveType === "slow-2g") {
+      setVideoMode({ preload: "none", loadSource: false });
+    } else if (effectiveType === "3g") {
+      setVideoMode({ preload: "metadata", loadSource: true });
+    } else {
+      setVideoMode({ preload: "auto", loadSource: true });
+    }
+  }, []);
+
   return (
     <section
       id="home"
@@ -11,15 +31,17 @@ export function HeroVideo() {
     >
       {/* Background video — full frame on mobile (contain), cinematic cover on desktop */}
       <video
-        autoPlay
+        autoPlay={videoMode.loadSource}
         muted
         loop
         playsInline
-        preload="auto"
+        preload={videoMode.preload}
+        poster="/assets/tvk-bg-poster.jpg"
+        fetchPriority="high"
         className="absolute inset-0 h-full w-full object-contain object-center sm:object-cover"
         style={{ background: "var(--tvk-black)" }}
       >
-        <source src={video.url} type="video/mp4" />
+        {videoMode.loadSource && <source src={video.url} type="video/mp4" />}
       </video>
 
       {/* Gradient overlays for legibility */}
