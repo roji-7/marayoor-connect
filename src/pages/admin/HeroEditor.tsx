@@ -43,7 +43,7 @@ export default function HeroEditor() {
     queryKey: ["site_content", "hero"],
     queryFn: async () => {
       const { data } = await supabase.from("site_content").select("value").eq("key", "hero").maybeSingle();
-      return (data?.value as HeroData) ?? null;
+      return (data?.value as unknown as HeroData) ?? null;
     },
   });
   const [form, setForm] = useState<HeroData>(DEFAULTS);
@@ -52,7 +52,7 @@ export default function HeroEditor() {
   }, [data]);
 
   async function save() {
-    const { error } = await supabase.from("site_content").upsert({ key: "hero", value: form });
+    const { error } = await supabase.from("site_content").upsert({ key: "hero", value: form as unknown as Record<string, unknown> });
     if (error) return toast.error(error.message);
     toast.success("Hero saved");
     qc.invalidateQueries({ queryKey: ["site_content"] });
