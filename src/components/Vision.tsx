@@ -1,5 +1,13 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Wheat, Scale, Hospital, Briefcase, Sparkles } from "lucide-react";
+import { useSection } from "@/hooks/useSiteContent";
+
+const VISION_DEFAULTS = {
+  eyebrow: "Our Vision",
+  title_main: "A New",
+  title_accent: "Tamil Nadu",
+  body: "Six pillars that guide our work in Marayoor and beyond.",
+};
 
 const visions = [
   { icon: GraduationCap, title: "Quality Education", text: "Free, modern education for every child of Marayoor." },
@@ -11,6 +19,7 @@ const visions = [
 ];
 
 export function Vision() {
+  const c = useSection("vision", VISION_DEFAULTS);
   return (
     <section id="vision" className="relative bg-tvk-black py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -21,11 +30,11 @@ export function Vision() {
           transition={{ duration: 0.8 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <div className="mb-3 text-sm uppercase tracking-[0.4em] text-tvk-red">Our Vision</div>
+          <div className="mb-3 text-sm uppercase tracking-[0.4em] text-tvk-red">{c.eyebrow}</div>
           <h2 className="font-display text-4xl text-tvk-gold sm:text-5xl md:text-6xl">
-            A New <span className="text-foreground">Tamil Nadu</span>
+            {c.title_main} <span className="text-foreground">{c.title_accent}</span>
           </h2>
-          <p className="mt-4 text-muted-foreground">Six pillars that guide our work in Marayoor and beyond.</p>
+          <p className="mt-4 text-muted-foreground">{c.body}</p>
         </motion.div>
 
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
