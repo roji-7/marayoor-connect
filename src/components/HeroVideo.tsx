@@ -2,13 +2,29 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import video from "@/assets/tvk-bg.mp4.asset.json";
+import { useSection } from "@/hooks/useSiteContent";
 
 interface ConnInfo {
   saveData?: boolean;
   effectiveType?: "2g" | "3g" | "4g" | "slow-2g";
 }
 
+const HERO_DEFAULTS = {
+  badge: "Official Website",
+  title_main: "TVK",
+  title_accent: "MARAYOOR",
+  tagline: "தமிழக வெற்றிக் கழகம் — Marayoor Unit",
+  subtitle: "Victory for Tamil Nadu. Strength of the People. Voice of Marayoor.",
+  cta_primary_label: "Get Member ID",
+  cta_primary_href: "#member",
+  cta_secondary_label: "Learn More",
+  cta_secondary_href: "#about",
+  video_url: "",
+  poster_url: "",
+};
+
 export function HeroVideo() {
+  const hero = useSection("hero", HERO_DEFAULTS);
   const [videoMode, setVideoMode] = useState<{
     preload: "auto" | "metadata" | "none";
     loadSource: boolean;
@@ -28,6 +44,9 @@ export function HeroVideo() {
     }
   }, []);
 
+  const videoSrc = hero.video_url || video.url;
+  const posterSrc = hero.poster_url || "/assets/tvk-bg-poster.jpg";
+
   return (
     <section
       id="home"
@@ -41,11 +60,11 @@ export function HeroVideo() {
         loop
         playsInline
         preload={videoMode.preload}
-        poster="/assets/tvk-bg-poster.jpg"
+        poster={posterSrc}
         className="absolute inset-0 h-full w-full object-contain object-center sm:object-cover"
         style={{ background: "var(--tvk-black)" }}
       >
-        {videoMode.loadSource && <source src={video.url} type="video/mp4" />}
+        {videoMode.loadSource && <source src={videoSrc} type="video/mp4" />}
       </video>
 
       {/* Gradient overlays for legibility */}
@@ -60,7 +79,7 @@ export function HeroVideo() {
           className="mb-4 inline-block rounded-full border border-tvk-gold/50 bg-tvk-black/60 px-4 py-1.5 backdrop-blur-sm"
         >
           <span className="text-[10px] uppercase tracking-[0.3em] text-tvk-gold sm:text-xs">
-            Official Website
+            {hero.badge}
           </span>
         </motion.div>
 
@@ -70,7 +89,7 @@ export function HeroVideo() {
           transition={{ duration: 1, delay: 0.5 }}
           className="font-display text-4xl font-bold leading-none text-tvk-gold drop-shadow-[0_4px_30px_rgba(220,40,40,0.8)] xs:text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
         >
-          TVK <span className="text-foreground">MARAYOOR</span>
+          {hero.title_main} <span className="text-foreground">{hero.title_accent}</span>
         </motion.h1>
 
         <motion.p
@@ -79,7 +98,7 @@ export function HeroVideo() {
           transition={{ duration: 1, delay: 0.9 }}
           className="mt-3 max-w-2xl px-2 text-sm text-foreground/90 sm:mt-4 sm:text-lg md:text-xl"
         >
-          தமிழக வெற்றிக் கழகம் — Marayoor Unit
+          {hero.tagline}
         </motion.p>
 
         <motion.p
@@ -88,7 +107,7 @@ export function HeroVideo() {
           transition={{ duration: 1, delay: 1.2 }}
           className="mt-1.5 max-w-xl px-3 text-xs text-muted-foreground sm:mt-2 sm:text-base"
         >
-          Victory for Tamil Nadu. Strength of the People. Voice of Marayoor.
+          {hero.subtitle}
         </motion.p>
 
         <motion.div
@@ -98,16 +117,16 @@ export function HeroVideo() {
           className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8"
         >
           <a
-            href="#member"
+            href={hero.cta_primary_href}
             className="rounded-full bg-tvk-red px-6 py-2.5 font-display text-sm uppercase tracking-wider text-foreground shadow-glow transition hover:scale-105 hover:bg-tvk-red-glow animate-glow-pulse sm:px-7 sm:py-3 sm:text-base"
           >
-            Get Member ID
+            {hero.cta_primary_label}
           </a>
           <a
-            href="#about"
+            href={hero.cta_secondary_href}
             className="rounded-full border-2 border-tvk-gold bg-transparent px-6 py-2.5 font-display text-sm uppercase tracking-wider text-tvk-gold transition hover:bg-tvk-gold hover:text-tvk-black sm:px-7 sm:py-3 sm:text-base"
           >
-            Learn More
+            {hero.cta_secondary_label}
           </a>
         </motion.div>
       </div>

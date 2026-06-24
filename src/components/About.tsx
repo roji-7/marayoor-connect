@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
 import { Flame, Users, Heart, Trophy } from "lucide-react";
+import { useSection } from "@/hooks/useSiteContent";
+
+const ABOUT_DEFAULTS = {
+  eyebrow: "About Us",
+  title_main: "Voice of",
+  title_accent: "Marayoor",
+  body:
+    "Tamilaga Vettri Kazhagam (TVK) Marayoor unit stands as the proud regional wing of Thalapathy Vijay's people-first political movement. We are committed to social justice, quality education, farmer welfare, and a corruption-free Tamil Nadu.",
+};
 
 const stats = [
   { icon: Users, label: "Active Members", value: "10,000+" },
@@ -9,6 +18,7 @@ const stats = [
 ];
 
 export function About() {
+  const c = useSection("about", ABOUT_DEFAULTS);
   return (
     <section id="about" className="relative overflow-hidden bg-tvk-black py-20 sm:py-28">
       <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-tvk-red/20 blur-3xl" />
@@ -22,15 +32,11 @@ export function About() {
           transition={{ duration: 0.8 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <div className="mb-3 text-sm uppercase tracking-[0.4em] text-tvk-red">About Us</div>
+          <div className="mb-3 text-sm uppercase tracking-[0.4em] text-tvk-red">{c.eyebrow}</div>
           <h2 className="font-display text-4xl text-tvk-gold sm:text-5xl md:text-6xl">
-            Voice of <span className="text-foreground">Marayoor</span>
+            {c.title_main} <span className="text-foreground">{c.title_accent}</span>
           </h2>
-          <p className="mt-6 text-base text-muted-foreground sm:text-lg">
-            Tamilaga Vettri Kazhagam (TVK) Marayoor unit stands as the proud regional wing of
-            Thalapathy Vijay's people-first political movement. We are committed to social justice,
-            quality education, farmer welfare, and a corruption-free Tamil Nadu.
-          </p>
+          <p className="mt-6 text-base text-muted-foreground sm:text-lg">{c.body}</p>
         </motion.div>
 
         <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
