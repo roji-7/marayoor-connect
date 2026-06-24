@@ -52,7 +52,7 @@ export default function HeroEditor() {
   }, [data]);
 
   async function save() {
-    const { error } = await supabase.from("site_content").upsert({ key: "hero", value: form as unknown as Record<string, unknown> });
+    const { error } = await supabase.from("site_content").upsert({ key: "hero", value: JSON.parse(JSON.stringify(form)) });
     if (error) return toast.error(error.message);
     toast.success("Hero saved");
     qc.invalidateQueries({ queryKey: ["site_content"] });

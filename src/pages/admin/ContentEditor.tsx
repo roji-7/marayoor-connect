@@ -63,7 +63,7 @@ function SectionForm({ section }: { section: Section }) {
   }, [data, section]);
 
   async function save() {
-    const { error } = await supabase.from("site_content").upsert({ key: section, value: form });
+    const { error } = await supabase.from("site_content").upsert({ key: section, value: JSON.parse(JSON.stringify(form)) });
     if (error) return toast.error(error.message);
     toast.success("Saved");
     qc.invalidateQueries({ queryKey: ["site_content"] });
