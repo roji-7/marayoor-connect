@@ -44,7 +44,7 @@ export function Contact() {
 
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
           <motion.a
-            href={INSTAGRAM}
+            href={c.instagram}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 30 }}
@@ -66,7 +66,7 @@ export function Contact() {
           </motion.a>
 
           <motion.a
-            href={WHATSAPP}
+            href={c.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 30 }}
@@ -101,7 +101,7 @@ export function Contact() {
               </div>
               <div className="min-w-0">
                 <div className="font-display text-xl text-foreground">Office</div>
-                <div className="text-sm text-muted-foreground">Marayoor, Idukki, Kerala</div>
+                <div className="text-sm text-muted-foreground">{c.address}</div>
               </div>
             </div>
           </motion.div>
@@ -119,7 +119,7 @@ export function Contact() {
               </div>
               <div className="min-w-0">
                 <div className="font-display text-xl text-foreground">Email</div>
-                <div className="truncate text-sm text-muted-foreground">tvk.marayoor@official.in</div>
+                <div className="truncate text-sm text-muted-foreground">{c.email}</div>
               </div>
             </div>
           </motion.div>
