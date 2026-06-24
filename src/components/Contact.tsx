@@ -1,10 +1,28 @@
 import { motion } from "framer-motion";
 import { Instagram, MessageCircle, MapPin, Mail } from "lucide-react";
+import { useSection } from "@/hooks/useSiteContent";
 
-const INSTAGRAM = "https://www.instagram.com/tvk_marayoor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==";
-const WHATSAPP = "https://chat.whatsapp.com/IuU6QS5BGxq24sE02gHpeK";
+const CONTACT_DEFAULTS = {
+  eyebrow: "Connect",
+  title_main: "Join the",
+  title_accent: "Family",
+  body: "Follow us and join our WhatsApp community for updates.",
+  instagram: "https://www.instagram.com/tvk_marayoor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+  whatsapp: "https://chat.whatsapp.com/IuU6QS5BGxq24sE02gHpeK",
+  address: "Marayoor, Idukki, Kerala",
+  email: "tvk.marayoor@official.in",
+  phone: "",
+};
+
+const FOOTER_DEFAULTS = {
+  description: "தமிழக வெற்றிக் கழகம் — Marayoor Unit. Official voice of the movement in Marayoor, Idukki.",
+  credit_text: "Developed by Zybeo Tech Studio",
+  credit_url: "https://zybeo.tech",
+  tagline: "★ Victory for Tamil Nadu ★",
+};
 
 export function Contact() {
+  const c = useSection("contact", CONTACT_DEFAULTS);
   return (
     <section id="contact" className="relative overflow-hidden bg-tvk-black py-20 sm:py-28">
       <div className="absolute inset-0 bg-gradient-to-t from-tvk-red/10 to-transparent" />
@@ -17,11 +35,11 @@ export function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <div className="mb-3 text-sm uppercase tracking-[0.4em] text-tvk-red">Connect</div>
+          <div className="mb-3 text-sm uppercase tracking-[0.4em] text-tvk-red">{c.eyebrow}</div>
           <h2 className="font-display text-4xl text-tvk-gold sm:text-5xl md:text-6xl">
-            Join the <span className="text-foreground">Family</span>
+            {c.title_main} <span className="text-foreground">{c.title_accent}</span>
           </h2>
-          <p className="mt-4 text-muted-foreground">Follow us and join our WhatsApp community for updates.</p>
+          <p className="mt-4 text-muted-foreground">{c.body}</p>
         </motion.div>
 
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
