@@ -2,13 +2,29 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import video from "@/assets/tvk-bg.mp4.asset.json";
+import { useSection } from "@/hooks/useSiteContent";
 
 interface ConnInfo {
   saveData?: boolean;
   effectiveType?: "2g" | "3g" | "4g" | "slow-2g";
 }
 
+const HERO_DEFAULTS = {
+  badge: "Official Website",
+  title_main: "TVK",
+  title_accent: "MARAYOOR",
+  tagline: "தமிழக வெற்றிக் கழகம் — Marayoor Unit",
+  subtitle: "Victory for Tamil Nadu. Strength of the People. Voice of Marayoor.",
+  cta_primary_label: "Get Member ID",
+  cta_primary_href: "#member",
+  cta_secondary_label: "Learn More",
+  cta_secondary_href: "#about",
+  video_url: "",
+  poster_url: "",
+};
+
 export function HeroVideo() {
+  const hero = useSection("hero", HERO_DEFAULTS);
   const [videoMode, setVideoMode] = useState<{
     preload: "auto" | "metadata" | "none";
     loadSource: boolean;
@@ -27,6 +43,9 @@ export function HeroVideo() {
       setVideoMode({ preload: "auto", loadSource: true });
     }
   }, []);
+
+  const videoSrc = hero.video_url || video.url;
+  const posterSrc = hero.poster_url || "/assets/tvk-bg-poster.jpg";
 
   return (
     <section
